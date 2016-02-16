@@ -1,4 +1,4 @@
-# HD49 elections explorer
+# sg elections explorer
 
 written for the daily texan by junyuan tan, senior tech ops
 

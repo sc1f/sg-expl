@@ -44,4 +44,4 @@ def main_page():
 	context['s1'] = copy['s1']
 	return render_template('index.html', **context)
 #debug
-if __name__ == '__main__': app.run(debug = true, host='0.0.0.0', port=8888)
+if __name__ == '__main__': app.run(host='0.0.0.0', port=8888)

@@ -2,10 +2,6 @@
 
 written for the daily texan by junyuan tan, senior tech ops
 
-backend by miles hutson
+# to run
 
-*To Run*
-
-pip install flask, copytext, openpyxl, markupsafe, beautifulsoup4
-
-cd backend, python application.py
+it is a mess please help

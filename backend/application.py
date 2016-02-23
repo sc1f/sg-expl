@@ -13,25 +13,32 @@ import settings
 app = Flask(__name__, static_folder=settings.static_files_location, 
 	        template_folder=settings.template_folders_location)
 
+# amy's initial untransposed responses
+# https://docs.google.com/spreadsheets/export?id=1cAMaUa0EZkUlnkA11N4wVIUEVVfbSVOwuXS0MVppAlw&exportFormat=xlsx
+# grab the master sheet
+# https://docs.google.com/spreadsheets/export?id=1-sUTt1w81iZjRnZA3uzt5TUqUCnHxTyQWWsz6tba018&exportFormat=xlsx
+
 #datawork
 candidates = {}
 
 copy = copytext.Copy('dataset.xlsx')
 
 for sheetName in copy.sheetNames():
-	if sheetName == 's1': 
+    # ignore the master contact sheet
+	if sheetName == 'Master':
 		continue
+        # if the photocredit is blank, write in "Photo courtesy of the candidate"
+        # check for a column with purely numbers; that column will be the number of places available that we have to display
 	for row in copy[sheetName]:
 		candidateContext = {
 				'name' : row['cand_name'].unescape(),
-				'occupation': row['occu'].unescape(),
+				'position': row['position'].unescape(),
+				'major': row['major'].unescape(),
+				'year': row['year'].unescape(),
 				'biography': row['bio'].unescape(),
 				'endorsements': row['endors'].unescape(),
 				'platform': row['plat'].unescape(),
-				'priority1': row['p1'].unescape(),
-				'priority2': row['p2'].unescape(),
-				'priority3': row['p3'].unescape(),
-				'twitter': row['twit'].unescape(),
+				'facebook': row['fb'].unescape(),
 				'website': row['site'].unescape(),
 				'photocred': row['pcred'].unescape(),
 				'photo': row['purl'].unescape()
@@ -39,9 +46,11 @@ for sheetName in copy.sheetNames():
 	candidates = candidateContext
 #routing
 @app.route('/')
-def main_page():
+def main():
 	context = candidates
-	context['s1'] = copy['s1']
+	context['sg'] = copy['sg']
 	return render_template('index.html', **context)
+def sub():
+	context = candidates
 #debug
 if __name__ == '__main__': app.run(host='0.0.0.0', port=8888)

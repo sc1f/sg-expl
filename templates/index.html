@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>SG Election Explorer 2016</title>
+		<title>{% block title %}{% endblock %} | SG Election Explorer 2016</title>
 		<link rel="stylesheet" href="/static/css/styles.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<link href='https://fonts.googleapis.com/css?family=Roboto:400,700,700italic,400italic|Lora:400,400italic,700' rel='stylesheet' type='text/css'>
@@ -45,60 +45,25 @@
 		</nav>
 		<div class="container-fluid">
 			<div class="row">
+				<div class="col-md-1">
+					<img id="bg" src="/static/images/cover.jpg" alt="cover_image">
+				</div>
 				<div class="col-md-2" aria-label="padding"></div>
   				<div class="col-md-8 intro">
-					<h1>SG Candidates 2016: Better Than the GOP</h1>
-					<h5>By <a href="https://www.dailytexanonline.com/author/forrest-milburn"> Forrest Milburn</a>, <a href="https://www.dailytexanonline.com/author/junyuan-tan">Junyuan Tan</a> and <a href="https://www.dailytexanonline.com/author/miles-hutson">Miles Hutson</a></h5>
+					<h1>2016 Student Government Elections: Where They Stand</h1>
+					<h5>By <a href="https://www.dailytexanonline.com/author/junyuan-tan">Junyuan Tan</a>, <a href="https://www.dailytexanonline.com/author/amy-zhang">Amy Zhang</a>, <a href="https://www.dailytexanonline.com/author/rachel-zein">Rachel Zein</a></h5>
 					<div class="fb-contain">
-					<div class="fb-share-button" data-href="http://interactives.dailytexanonline.com/hd49" data-layout="button" style="margin:0 auto;vertical-align:top;"></div>
-					<a href="https://twitter.com/share" class="twitter-share-button" data-text="Curious about the upcoming UT Student Government election? Check out this issues explorer by @thedailytexan">Tweet</a>
+					<div class="fb-share-button" data-href="http://dailytexanonline.com/features/sg2016" data-layout="button" style="margin:0 auto;vertical-align:top;"></div>
+					<a href="https://twitter.com/share" class="twitter-share-button" data-text="UT's Student Government election is coming up! Get informed with this issues explorer by @thedailytexan">Tweet</a>
 					</div>
-					<p class="intro-article">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam venenatis tellus et mi sollicitudin, a mollis ligula convallis. Proin quis risus non urna cursus accumsan et ullamcorper massa. Aliquam imperdiet tempor velit. Nullam in ligula ultrices sapien tempus tempor. Nulla convallis lorem a mauris lobortis lacinia. Integer vel sagittis sapien, vel tincidunt ante. Aenean et lorem nibh. Pellentesque vel blandit lacus. Integer scelerisque sit amet leo at dignissim. Sed porttitor auctor metus sit amet varius. Etiam varius posuere sem a sodales. Fusce aliquet eget nisi at interdum. Maecenas nunc orci, pulvinar vitae erat sed, volutpat mattis neque. Nulla malesuada erat eu velit congue tempus. Donec non ex ut lorem vestibulum sodales.</p>
-					<!-- Facebook sharing link? -->
-  				</div>
   				<div class="col-md-2" aria-label="padding"></div>
   				<hr/>
-  				{% for row in s1 %}
-  				<div class="col-md-4 left">
-  					<img src="{{ row['purl'] }}" alt="{{ row['cand_name'] }}" class="candidate-img">
-  					<!-- <p class="photo-cred">Photo courtesy of the candidate</p> -->
-  					<h4 class="link"><a href="{{ row['site'] }}">Campaign Website</a></h4>
-  					<h4 class="link"><a href="{{ row['fb'] }}">Facebook</a></h4>
-  					<h4 class="link"><a href="{{ row['twit'] }}">Twitter</a></h4>
-
-  					<!-- add twitter feed -->
-  					{% if row['twitter_widget'] != " " %}
-					<div class="twitter-contain table" style="margin: auto; position: relative;">
-						<div class="table-cell">
-  							<a class="twitter-timeline" href="{{row['twit']}}" data-widget-id="{{row['twitter_widget']}}" style="margin:auto !important;" width="350px" height="250px"></a>
-  						</div>
-					</div>
-					{% endif %}
-  				</div>
-  				<div class="col-md-8 main">
-  					<h2 class="name">{{ row['cand_name'] }}</h2>
-  					<h3 class="occupation">{{ row['occu'] }}</h3>
-  					<h4 class="subhead">Biography</h4>
-  					<p class="description">{{ row['bio'] }}</p>
-  					<h4 class="subhead">Why should students vote for you?</h4>
-  					<p class="description">{{ row['plat'] }}</p>
-  					<h4 class="subhead">Policy Priorities</h4>
-  						<ol class="priority-contain">
-  							<li class="priority">{{ row['p1'] }}</li>
-  							<li class="priority">{{ row['p2'] }}</li>
-  							<li class="priority">{{ row['p3'] }}</li>
-  						</ol>
-  					<h4 class="subhead">Endorsed By:</h4>
-  					<p class="description">{{ row['endors'] }}</p>
-  				</div>
-  				<hr/>
-  				{% endfor %}
-  				<!-- Facebook sharing link? -->
-				<!-- credits -->
+                {% block content %}
+                {% endblock %}
 				<div class="col-md-2" aria-label="padding"></div>
   				<div class="col-md-8 intro">
 					<h3 class="contrib">Contributors</h3>
-					<p class="contrib-txt">Article by <a href="https://www.dailytexanonline.com/author/forrest-milburn"> Forrest Milburn</a> | Developed by <a href="https://www.dailytexanonline.com/author/junyuan-tan">Junyuan Tan</a> | Photos by <a href="https://www.dailytexanonline.com/author/rachel-zein">Rachel Zein</a> | Original backend by <a href="https://www.dailytexanonline.com/author/miles-hutson">Miles Hutson</a></h5>					
+					<p class="contrib-txt">Developed by <a href="https://www.dailytexanonline.com/author/junyuan-tan">Junyuan Tan</a> and  <a href="https://www.dailytexanonline.com/author/amy-zhang">Amy Zhang</a> | Photos by <a href="https://www.dailytexanonline.com/author/rachel-zein">Rachel Zein</a> </p>
   				</div>
   				<div class="col-md-2" aria-label="padding"></div>
 			</div>

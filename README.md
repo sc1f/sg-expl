@@ -16,4 +16,6 @@ written for the daily texan by junyuan tan, senior tech ops
 
 ```cd backend
    python generate.py
+   cd build
+   python -m SimpleHTTPServer 8000 (or any other local port tbh)
 ```

@@ -30,13 +30,13 @@ for sheetName in copy.sheetNames():
             'photo_credit': "Photo Credit: " + row['Photo Credit'] if row[
                                                                           'Photo Credit'] != "" else "Photo courtesy of the candidate",
             'candidate_name': row['Candidate Name'],
-            'major': row['Major'].replace('|||', ' | '),
-            'year': row['Year'].replace('|||', ' | '),
+            'major': row['Major'],#.replace('|||', ' | '),
+            'year': row['Year'],#.replace('|||', ' | '),
             'position': row['Position'],
             'statement': ["The Daily Texan does not have a statement on file for this candidate."] if row[
                                                                                                           'Statement'] == "" else
             row['Statement'],
-            'platform': row['Campaign Platform Points'].replace('|||', '<br>') if
+            'platform': row['Campaign Platform Points'] if#.replace('|||', '<br>')
             row[
                 'Campaign Platform Points'] != '' else "The Daily Texan does not have position points on file for this candidate.",
             'twitter': row['Twitter'],
@@ -48,6 +48,7 @@ for sheetName in copy.sheetNames():
                 "/", "_")
 
         candidates[candidateId] = candidateContext
+        masterCandidateContext = candidates
 
 
 # routing
@@ -58,15 +59,15 @@ def candidate_page(candidate_id=None):
     # noinspection PyPep8Naming
     candidateId = (context['candidate_name'] + context['major'] + context['year']).replace(" ", "_").replace("/", "_")
 
-    return render_template('candidate.html', **context)
+    return render_template('candidate.html', context)
 
 
 @app.route('/')
 def main_page():
-    context = []
+    context = masterCandidateContext
     context['Races'] = copy['Races']
     context['Categories'] = copy['Categories']
-    return render_template('base.html', **context)
+    return render_template('main.html', **context)
 
 
 if __name__ == '__main__': app.run(debug=True)

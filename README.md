@@ -4,4 +4,16 @@ written for the daily texan by junyuan tan, senior tech ops
 
 # to run
 
-it is a mess please help
+```pip install
+        copytext
+        flask
+        frozen-flask
+   cd backend
+   python application.py
+```
+
+# to generate a static version
+
+```cd backend
+   python generate.py
+```

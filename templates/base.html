@@ -50,8 +50,8 @@
 				</div>
 				<div class="col-md-2" aria-label="padding"></div>
   				<div class="col-md-8 intro">
-					<h1>2016 Student Government Elections: Where They Stand</h1>
-					<h5>By <a href="https://www.dailytexanonline.com/author/junyuan-tan">Junyuan Tan</a>, <a href="https://www.dailytexanonline.com/author/amy-zhang">Amy Zhang</a>, <a href="https://www.dailytexanonline.com/author/rachel-zein">Rachel Zein</a></h5>
+					<h1>{% block header %}{% endblock %}</h1>
+                    {% block credits %}{% endblock %}
 					<div class="fb-contain">
 					<div class="fb-share-button" data-href="http://dailytexanonline.com/features/sg2016" data-layout="button" style="margin:0 auto;vertical-align:top;"></div>
 					<a href="https://twitter.com/share" class="twitter-share-button" data-text="UT's Student Government election is coming up! Get informed with this issues explorer by @thedailytexan">Tweet</a>
@@ -76,5 +76,6 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 		<script src="static/js/main.js"></script>
-	</body>
+	    </div>
+    </body>
 </html>

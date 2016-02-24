@@ -1,21 +1,25 @@
-{% extends index.html %}
+{% extends base.html %}
+{% block title %}{{ candidate_name }}{% endblock %}
 {%  block content %}
     {% for row in sheetName %}
         <div class="col-md-4 left">
-            <img src="{{ row['purl'] }}" alt="{{ row['cand_name'] }}" class="candidate-img">
-            <p class="photo-cred">{% if row['Photo Credit'] != '' %}{{ row['Photo Credit'] }}{% else %}Photo courtesy of the candidate{% endif %}</p>
-            <h4 class="link">{{ row['Major'] }}</h4>
-            <h4 class="link">{{ row['Year'] }}</h4>
-            <h4 class="link"><a href="{{ row['Campaign Website'] }}">Campaign Website</a></h4>
-            <h4 class="link"><a href="{{ row['Twitter'] }}">Twitter</a></h4>
+            <img src="{{ photo_url }}" alt="{{ candidate_name }}" class="candidate-img">
+            <p class="photo-cred">{{ photo_credit }}</p>
+            <h4 class="link">{{ major }}</h4>
+            <h4 class="link">{{ year }}</h4>
+            <h4 class="link"><a href="{{ website }}">{{ candidate_name }} Campaign Website</a></h4>
+            <h4 class="link"><a href="{{ twitter }}">{{ candidate_name }} Twitter</a></h4>
         </div>
         <div class="col-md-8 main">
-            <h2 class="name">{{ row['cand_name'] }}</h2>
-            <h3 class="position">{{ row['occu'] }}</h3>
+            <h3 class="position">{{ position }}</h3>
             <h4 class="subhead">Statement</h4>
-            <p class="description">{{ row['Statement'] }}</p>
+            <p class="description">{{ statement }}</p>
             <h4 class="subhead">Platform</h4>
-            <p class="description">{{ row['Platform'] }}</p>
+            <p class="description">{{ platform }}</p>
+            {% if DT_coverage != '' %}
+                <h4 class="subhead">Daily Texan Coverage</h4>
+                <p class="description">Some content</p>
+            {% endif %}
         </div>
     {% endfor %}
 <hr/>

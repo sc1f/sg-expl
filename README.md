@@ -9,13 +9,12 @@ written for the daily texan by junyuan tan, senior tech ops
         flask
         frozen-flask
    cd backend
-   python application.py
-```
+   python application.py```
+
 
 # to generate a static version
 
 ```cd backend
    python generate.py
    cd build
-   python -m SimpleHTTPServer 8000 (or any other local port tbh)
-```
+   python -m SimpleHTTPServer 8000 (or any other local port tbh)```

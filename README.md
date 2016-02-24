@@ -8,13 +8,15 @@ written for the daily texan by junyuan tan, senior tech ops
         copytext
         flask
         frozen-flask
+        <br>
    cd backend
+   <br>
    python application.py```
 
 
 # to generate a static version
 
-```cd backend
-   python generate.py
-   cd build
+```cd backend <br>
+   python generate.py <br>
+   cd build <br>
    python -m SimpleHTTPServer 8000 (or any other local port tbh)```

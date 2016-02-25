@@ -1,52 +1,156 @@
 {% extends "base.html" %}
 {% block title %}
-    {% if path == '/sg' %}
+    {% if request.path == '/sg' %}
         Student Government
-    {% elif path == '/gsa' %}
+    {% elif request.path == '/gsa' %}
         Graduate Student Assembly
-    {% elif path == '/coop' %}
+    {% elif request.path == '/coop' %}
         University Co-Op
-    {% elif path == '/union' %}
-        Texas Union
-    {% elif path == '/tsm' %}
+    {% elif request.path == '/union' %}
+        University Unions
+    {% elif request.path == '/tsm' %}
         Texas Student Media
     {% else %}
-    2016 Student Election Explorer
+        2016 Student Election Explorer
     {% endif %}
 {% endblock %}
-{% block home %}
-    <li id="homebtn"><a href="/">Home</a></li>
-{% endblock %}
 {% block navigation %}
-<ul class="nav navbar-nav navbar-right">
-    <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Select a Race <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-            <li><a href="/sg">Student Government</a></li>
-            <li><a href="/gsa">Graduate Student Assembly</a></li>
-            <li><a href="/coop">University Co-op</a></li>
-            <li><a href="/union">Texas Union</a></li>
-            <li><a href="/tsm">Texas Student Media</a></li>
-        </ul> <!-- dropdown-menu -->
-    </li> <!-- dropdown -->
-</ul> <!-- navbar-right -->
+    <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <li id="homebtn"><a href="/">Home</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                   aria-expanded="false">Select a Race <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/sg">Student Government</a></li>
+                    <li><a href="/gsa">Graduate Student Assembly</a></li>
+                    <li><a href="/coop">University Co-op</a></li>
+                    <li><a href="/union">University Unions</a></li>
+                    <li><a href="/tsm">Texas Student Media</a></li>
+                </ul> <!-- dropdown-menu -->
+            </li> <!-- dropdown -->
+        </ul> <!-- navbar-right -->
+    </div>
 {% endblock %}
-{% block select_category %}
+{% block credits %}<h5>By <a href="https://www.dailytexanonline.com/author/junyuan-tan">Junyuan Tan</a>, <a
+        href="https://www.dailytexanonline.com/author/amy-zhang">Amy Zhang</a>, and <a
+        href="https://www.dailytexanonline.com/author/rachel-zein">Rachel Zein</a></h5>{% endblock %}
+{% block header %}
+    {% if request.path == '/sg' %}
+        Student Government
+    {% elif request.path == '/gsa' %}
+        Graduate Student Assembly
+    {% elif request.path == '/coop' %}
+        University Co-Op
+    {% elif request.path == '/union' %}
+        University Unions
+    {% elif request.path == '/tsm' %}
+        Texas Student Media
+    {% else %}
+        2016 Student Election Explorer
+    {% endif %}
+{% endblock %}
+{% block description %}
+    {% if request.path == '/sg' %}
+        Student Government is the official student voice to the UT administration, the Board of Regents and the Texas
+        Legislature. SG aims to represent students' interests, increase student decision-making power and improve campus
+        life by creating effective student services.
+    {% elif request.path == '/gsa' %}
+        Graduate Student Assembly is the official graduate student voice to the UT administration, the Board of Regents
+        and the Texas Legislature. Members of the organization formally address specific graduate student concerns.
+    {% elif request.path == '/coop' %}
+        The University Unions Board of Directors recommends rules and procedures for the operation of the Unions'
+        facilities, which include the Texas Union, the Student Activity Center and the Hogg Auditorium. The board also
+        oversees Campus Events and Entertainment.
+    {% elif request.path == '/union' %}
+        The University Co-op Board of Directors directs the University Co-op and oversees scholarships, grants and
+        funding. The student body elects two full-time students to serve on the board for two years.
+    {% elif request.path == '/tsm' %}
+        The Texas Student Media Board of Operating Trustees oversees the University's five official media outlets: KVRX
+        91.7 FM, the Texas Travesty, Texas Student Television, the Cactus yearbook and The Daily Texan.
+    {% else %}
+        2016 Student Election Explorer
+    {% endif %}
+{% endblock %}
+{% block content %}
     <div class="col-md-4"></div>
     <div class="col-md-4">
-        <div class="sel_category">
-            Select a
-            <button class="btn btn-default btn-lg">Category</button>
-            <div class="categories">
-
+        <div class="sel-category" style="text-align: center;">
+            <div class="cat">
+                Select a
+                <button class="btn btn-default race-btn">Race <i class="fa fa-caret-right" id="ico1"></i></button>
+                <div class="races" style="padding-top: .5em;">
+                    <ul>
+                        {% if request.path == '/sg' %}
+                            {% for row in SG %}
+                                <a href="#{{ row['URL'] }}" class="race-link">
+                                    <li>{{ row['Position'] }}</li>
+                                </a>
+                            {% endfor %}
+                            <hr/>
+                            <li style="color: grey; font-size:.9em">Graduate School Representative*</li>
+                            <li style="color: grey; font-size:.9em">Lyndon B. Johnson School of Public Affairs
+                                Representative*
+                            </li>
+                            <li style="color: grey; font-size:.9em">Pharmacy School Representative*</li>
+                            <li style="color: grey; font-size:.85em">* There are no candidates in this race.</li>
+                        {% elif request.path == '/gsa' %}
+                            {% for row in GSA %}
+                                <a href="#{{ row['URL'] }}" class="race-link">
+                                    <li>{{ row['Position'] }}</li>
+                                </a>
+                            {% endfor %}
+                        {% elif request.path == '/coop' %}
+                            {% for row in Coop %}
+                                <a href="#{{ row['URL'] }}" class="race-link">
+                                    <li>{{ row['Position'] }}</li>
+                                </a>
+                            {% endfor %}
+                        {% elif request.path == '/union' %}
+                            {% for row in Union %}
+                                <a href="#{{ row['URL'] }}" class="race-link">
+                                    <li>{{ row['Position'] }}</li>
+                                </a>
+                            {% endfor %}
+                        {% elif request.path == '/tsm' %}
+                            {% for row in TSM %}
+                                <a href="#{{ row['URL'] }}" class="race-link">
+                                    <li>{{ row['Position'] }}</li>
+                                </a>
+                            {% endfor %}
+                        {% else %}
+                            Oops, we messed up. Please refresh the page and try again.
+                        {% endif %}
+                        <!-- FIXME ugly way to remove duplicates at least do something to hide the unstyled flash -->
+                        <script>
+                            var seen = {};
+                            $('.race-link').each(function () {
+                                var txt = $(this).text();
+                                if (seen[txt])
+                                    $(this).remove();
+                                else
+                                    seen[txt] = true;
+                            });
+                        </script>
+                    </ul>
+                </div>
             </div>
-            <hr/>
+            <br>
+            <div class="cand">
+                Then select a
+                <button class="btn btn-default cand-btn">Candidate <i class="fa fa-caret-right" id="ico2"></i></button>
+                <div class="candidates" style="padding-top: .5em;">
+                    Hello World!
+                </div>
+            </div>
+            <script>
+
+            </script>
+            <hr id="minihr"/>
+            <h3>Race here</h3>
         </div>
     </div>
     <div class="col-md-4"></div>
-{% endblock %}
-{%  block content %}
-    Hello world
     {% for row in sheetName %}
         <div class="col-md-4 left">
             <img src="{{ photo_url }}" alt="{{ candidate_name }}" class="candidate-img">
@@ -68,5 +172,5 @@
             {% endif %}
         </div>
     {% endfor %}
-<hr/>
+    <hr/>
 {% endblock %}

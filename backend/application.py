@@ -30,6 +30,7 @@ for sheetName in copy.sheetNames():
             'photo_credit': "Photo Credit: " + row['Photo Credit'] if row[
                                                                           'Photo Credit'] != "" else "Photo courtesy of the candidate",
             'candidate_name': row['Candidate Name'],
+            'URL': row['URL'],
             'major': row['Major'],#.replace('|||', ' | '),
             'year': row['Year'],#.replace('|||', ' | '),
             'position': row['Position'],
@@ -61,6 +62,11 @@ for sheetName in copy.sheetNames():
 def candidate_display():
     context = candidates
     context['Races'] = copy['Races']
+    context['SG'] = copy['Student Government']
+    context['GSA'] = copy['Graduate Student Assembly']
+    context['Coop'] = copy['Coop']
+    context['Union'] = copy['University Unions']
+    context['TSM'] = copy['TSM']
     #candidateId = (context['candidate_name'] + context['major'] + context['year']).replace(" ", "_").replace("/", "_")
    #categoryId = context['position'].replace(" ","_")
     return render_template('category.html', **context)

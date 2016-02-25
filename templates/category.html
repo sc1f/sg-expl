@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}
+    {% if path == '/sg' %}
+        Student Government
+    {% elif path == '/gsa' %}
+        Graduate Student Assembly
+    {% elif path == '/coop' %}
+        University Co-Op
+    {% elif path == '/union' %}
+        Texas Union
+    {% elif path == '/tsm' %}
+        Texas Student Media
+    {% else %}
+    2016 Student Election Explorer
+    {% endif %}
+{% endblock %}
+{% block home %}
+    <li id="homebtn"><a href="/">Home</a></li>
+{% endblock %}
+{% block navigation %}
+<ul class="nav navbar-nav navbar-right">
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Select a Race <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><a href="/sg">Student Government</a></li>
+            <li><a href="/gsa">Graduate Student Assembly</a></li>
+            <li><a href="/coop">University Co-op</a></li>
+            <li><a href="/union">Texas Union</a></li>
+            <li><a href="/tsm">Texas Student Media</a></li>
+        </ul> <!-- dropdown-menu -->
+    </li> <!-- dropdown -->
+</ul> <!-- navbar-right -->
+{% endblock %}
+{% block select_category %}
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div class="sel_category">
+            Select a
+            <button class="btn btn-default btn-lg">Category</button>
+            <div class="categories">
+
+            </div>
+            <hr/>
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+{% endblock %}
+{%  block content %}
+    Hello world
+    {% for row in sheetName %}
+        <div class="col-md-4 left">
+            <img src="{{ photo_url }}" alt="{{ candidate_name }}" class="candidate-img">
+            <p class="photo-cred">{{ photo_credit }}</p>
+            <h4 class="link">{{ major }}</h4>
+            <h4 class="link">{{ year }}</h4>
+            <h4 class="link"><a href="{{ website }}">{{ candidate_name }} Campaign Website</a></h4>
+            <h4 class="link"><a href="{{ twitter }}">{{ candidate_name }} Twitter</a></h4>
+        </div>
+        <div class="col-md-8 main">
+            <h3 class="position">{{ position }}</h3>
+            <h4 class="subhead">Statement</h4>
+            <p class="description">{{ statement }}</p>
+            <h4 class="subhead">Platform</h4>
+            <p class="description">{{ platform }}</p>
+            {% if DT_coverage != '' %}
+                <h4 class="subhead">Daily Texan Coverage</h4>
+                <p class="description">Some content</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+<hr/>
+{% endblock %}

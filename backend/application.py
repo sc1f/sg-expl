@@ -41,29 +41,33 @@ for sheetName in copy.sheetNames():
                 'Campaign Platform Points'] != '' else "The Daily Texan does not have position points on file for this candidate.",
             'twitter': row['Twitter'],
             'campaign_website': row['Campaign Website'],
-            'photo_url': row['Photo URL'] + ".jpg"
+            'photo_url': row['Photo URL'] + ".jpg",
         }
         candidateId = (row['Candidate Name'] + row['Major'] + row['Year']).replace(" ",
                                                                                    "_").replace(
                 "/", "_")
+        categoryId = row['Position'].replace( " ","_")
 
-        candidates[candidateId] = candidateContext
+        candidates = candidateContext
         masterCandidateContext = candidates
 
 
 # routing
-
-@app.route('/candidates/<candidate_id>.html')
-def candidate_page(candidate_id=None):
-    context = candidates[candidate_id]
-    # noinspection PyPep8Naming
-    candidateId = (context['candidate_name'] + context['major'] + context['year']).replace(" ", "_").replace("/", "_")
-
-    return render_template('candidate.html', context)
+@app.route('/sg')
+@app.route('/gsa')
+@app.route('/coop')
+@app.route('/union')
+@app.route('/tsm')
+def candidate_display():
+    context = candidates
+    context['Races'] = copy['Races']
+    #candidateId = (context['candidate_name'] + context['major'] + context['year']).replace(" ", "_").replace("/", "_")
+   #categoryId = context['position'].replace(" ","_")
+    return render_template('category.html', **context)
 
 
 @app.route('/')
-def main_page():
+def main_display():
     context = masterCandidateContext
     context['Races'] = copy['Races']
     context['Categories'] = copy['Categories']

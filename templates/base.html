@@ -42,8 +42,8 @@
                 {% endblock %}
 			</div><!-- /.container-fluid -->
 		</nav>
-		<div class="container-fluid main-cont">
-			<div class="row" id="top">
+		<div class="container-fluid main-cont" id="top">
+			<div class="row">
 				<div class="col-md-2" aria-label="padding"></div>
   				<div class="col-md-8 intro">
 					<h1>{% block header %}{% endblock %}</h1>
@@ -53,12 +53,11 @@
 					<div class="fb-share-button" data-href="http://dailytexanonline.com/features/sg2016" data-layout="button" style="margin:0 auto;vertical-align:top;"></div>
 					<a href="https://twitter.com/share" class="twitter-share-button" data-text="UT's Student Government election is coming up! Get informed with this issues explorer by @thedailytexan">Tweet</a>
 					</div>
-  				<div class="col-md-2" aria-label="padding">
-                    <!-- FIXME to-top div
-                    <div id="to-top"><a href="#top">Back to Top</a></div>
-                    -->
                 </div>
-  				<hr/>
+  				<div class="col-md-2" aria-label="padding">
+                    <div id="to-top"><p>Back to Top</p></div>
+                </div>
+  				<hr id="not-first"/>
                 {% block content %}
                 {% endblock %}
 				<div class="col-md-2" aria-label="padding"></div>

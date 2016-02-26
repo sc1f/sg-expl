@@ -83,6 +83,18 @@ hr {
 hr.mini {
     width: 50%;
 }
+hr:not(#not-first):first-of-type {
+    width:25%;
+}
+hr.pad-down {
+    padding-bottom:20em;
+}
+.intro > h5 {
+    text-align: center;
+}
+i.fa {
+    color: #a0a0a0;
+}
 p, li, .sel-category {
     font-family: Roboto, Helvetica, Arial, sans-serif;
 }
@@ -109,10 +121,15 @@ div.fb-contain {
 }
 .link {
     text-align: center;
+    font-size:1.2em;
 }
 ol.priority-contain {
     margin-left: 1em;
     font-size: 1.25em;
+}
+p.platform {
+    font-style: italic;
+    font-size:2em;
 }
 ol.priority-contain > li {
     font-family: Lora;
@@ -211,7 +228,7 @@ div.timeline {
 }
 #to-top {
     position: fixed;
-    top: 0;
+    top: 94%;
     right: 0;
     width: auto;
     height: 2em;
@@ -225,7 +242,7 @@ div.timeline {
     z-index: 1000;
     overflow: hidden;
 }
-#to-top > a {
+#to-top > p {
     color: #a0a0a0;
     font-family: Roboto;
     text-transform: uppercase;
@@ -233,7 +250,7 @@ div.timeline {
     font-size: .8em;
     text-decoration: none;
 }
-#to-top > a:hover {
+#to-top > p:hover {
     color: #404040;
 }
 .navbar-header {
@@ -272,6 +289,7 @@ div.timeline {
     .subhead.pri {
         margin-bottom: 1em;
     }
+
 }
 @media (max-width: 768px) {
     .intro > h1{
@@ -280,6 +298,7 @@ div.timeline {
     p.footer-txt {
         font-size: 1em;
     }
+
 }
 @media (max-width: 540px) {
     .popup {

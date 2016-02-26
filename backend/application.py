@@ -44,14 +44,17 @@ for sheetName in copy.sheetNames():
             'campaign_website': row['Campaign Website'],
             'photo_url': row['Photo URL'] + ".jpg",
         }
-        candidateId = (row['Candidate Name'] + row['Major'] + row['Year']).replace(" ",
-                                                                                   "_").replace(
-                "/", "_")
-        categoryId = row['Position'].replace( " ","_")
+        #FIXME take care of ampersand issue within URL
+        candidateId = (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','')).lower()
+        categoryId = ((sheetName + '_' + row['Position']).replace( " ","_").replace('+',"_").replace('-','_')).lower()
 
         candidates = candidateContext
         masterCandidateContext = candidates
 
+        #debugging lines below
+        #print candidates
+        #rint categoryId
+        #print candidateId
 
 # routing
 @app.route('/sg')
@@ -78,6 +81,5 @@ def main_display():
     context['Races'] = copy['Races']
     context['Categories'] = copy['Categories']
     return render_template('main.html', **context)
-
 
 if __name__ == '__main__': app.run(debug=True)

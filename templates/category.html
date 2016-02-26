@@ -20,7 +20,7 @@
             <li id="homebtn"><a href="/">Home</a></li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                   aria-expanded="false">Select a Race <span class="caret"></span></a>
+                   aria-expanded="false">Select an Election <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="/sg">Student Government</a></li>
                     <li><a href="/gsa">Graduate Student Assembly</a></li>
@@ -34,7 +34,8 @@
 {% endblock %}
 {% block credits %}<h5>By <a href="https://www.dailytexanonline.com/author/junyuan-tan">Junyuan Tan</a>, <a
         href="https://www.dailytexanonline.com/author/amy-zhang">Amy Zhang</a>, and <a
-        href="https://www.dailytexanonline.com/author/rachel-zein">Rachel Zein</a></h5>{% endblock %}
+        href="https://www.dailytexanonline.com/author/rachel-zein">Rachel Zein</a></h5>
+{% endblock %}
 {% block header %}
     {% if request.path == '/sg' %}
         Student Government
@@ -73,104 +74,312 @@
     {% endif %}
 {% endblock %}
 {% block content %}
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-        <div class="sel-category" style="text-align: center;">
-            <div class="cat">
-                Select a
-                <button class="btn btn-default race-btn">Race <i class="fa fa-caret-right" id="ico1"></i></button>
-                <div class="races" style="padding-top: .5em;">
-                    <ul>
-                        {% if request.path == '/sg' %}
-                            {% for row in SG %}
-                                <a href="#{{ row['URL'] }}" class="race-link">
-                                    <li>{{ row['Position'] }}</li>
-                                </a>
-                            {% endfor %}
-                            <hr/>
-                            <li style="color: grey; font-size:.9em">Graduate School Representative*</li>
-                            <li style="color: grey; font-size:.9em">Lyndon B. Johnson School of Public Affairs
-                                Representative*
-                            </li>
-                            <li style="color: grey; font-size:.9em">Pharmacy School Representative*</li>
-                            <li style="color: grey; font-size:.85em">* There are no candidates in this race.</li>
-                        {% elif request.path == '/gsa' %}
-                            {% for row in GSA %}
-                                <a href="#{{ row['URL'] }}" class="race-link">
-                                    <li>{{ row['Position'] }}</li>
-                                </a>
-                            {% endfor %}
-                        {% elif request.path == '/coop' %}
-                            {% for row in Coop %}
-                                <a href="#{{ row['URL'] }}" class="race-link">
-                                    <li>{{ row['Position'] }}</li>
-                                </a>
-                            {% endfor %}
-                        {% elif request.path == '/union' %}
-                            {% for row in Union %}
-                                <a href="#{{ row['URL'] }}" class="race-link">
-                                    <li>{{ row['Position'] }}</li>
-                                </a>
-                            {% endfor %}
-                        {% elif request.path == '/tsm' %}
-                            {% for row in TSM %}
-                                <a href="#{{ row['URL'] }}" class="race-link">
-                                    <li>{{ row['Position'] }}</li>
-                                </a>
-                            {% endfor %}
-                        {% else %}
-                            Oops, we messed up. Please refresh the page and try again.
-                        {% endif %}
-                        <!-- FIXME ugly way to remove duplicates at least do something to hide the unstyled flash -->
-                        <script>
-                            var seen = {};
-                            $('.race-link').each(function () {
-                                var txt = $(this).text();
-                                if (seen[txt])
-                                    $(this).remove();
-                                else
-                                    seen[txt] = true;
-                            });
-                        </script>
-                    </ul>
-                </div>
-            </div>
-            <br>
-            <div class="cand">
-                Then select a
-                <button class="btn btn-default cand-btn">Candidate <i class="fa fa-caret-right" id="ico2"></i></button>
-                <div class="candidates" style="padding-top: .5em;">
-                    Hello World!
-                </div>
-            </div>
-            <script>
-
-            </script>
-            <hr id="minihr"/>
-            <h3>Race here</h3>
+<div class="col-md-4"></div>
+<div class="col-md-4">
+    <div class="sel-category" style="text-align: center; line-height: 2;padding-bottom: .3em;">
+        Select a &nbsp;
+        <button class="btn btn-default race-btn">race &nbsp; <i class="fa fa-caret-right" id="ico1"></i></button>
+        &nbsp;
+        <div class="races" style="padding-top: .5em;">
+            <ul>
+                {% if request.path == '/sg' %}
+                    {% for row in SG %}
+                        <a href="#{{ row['URL'] }}" class="race-link">
+                            <li>{{ row['Position'] }}</li>
+                        </a>
+                    {% endfor %}
+                    <hr/>
+                    <li style="color: grey; font-size:.9em">Graduate School Representative*</li>
+                    <li style="color: grey; font-size:.9em">Lyndon B. Johnson School of Public Affairs
+                        Representative*
+                    </li>
+                    <li style="color: grey; font-size:.9em">Pharmacy School Representative*</li>
+                    <li style="color: grey; font-size:.85em">* There are no candidates in this race.</li>
+                {% elif request.path == '/gsa' %}
+                    {% for row in GSA %}
+                        <a href="#{{ row['URL'] }}" class="race-link">
+                            <li>{{ row['Position'] }}</li>
+                        </a>
+                    {% endfor %}
+                {% elif request.path == '/coop' %}
+                    {% for row in Coop %}
+                        <a href="#{{ row['URL'] }}" class="race-link">
+                            <li>{{ row['Position'] }}</li>
+                        </a>
+                    {% endfor %}
+                {% elif request.path == '/union' %}
+                    {% for row in Union %}
+                        <a href="#{{ row['URL'] }}" class="race-link">
+                            <li>{{ row['Position'] }}</li>
+                        </a>
+                    {% endfor %}
+                {% elif request.path == '/tsm' %}
+                    {% for row in TSM %}
+                        <a href="#{{ row['URL'] }}" class="race-link">
+                            <li>{{ row['Position'] }}</li>
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    Oops, we messed up. Please refresh the page and try again.
+                {% endif %}
+                <!-- FIXME ugly way to remove duplicates at least do something to hide the unstyled flash -->
+                <script>
+                    var seen = {};
+                    $('.race-link').each(function () {
+                        var txt = $(this).text();
+                        if (seen[txt])
+                            $(this).remove();
+                        else
+                            seen[txt] = true;
+                    });
+                </script>
+            </ul>
+        </div>
+        then choose a &nbsp;
+        <button class="btn btn-default cand-btn">candidate &nbsp; <i class="fa fa-caret-right" id="ico2"></i></button>
+        <div class="candidates" style="padding-top: .5em;">
+            <ul>
+                {% if request.path == '/sg' %}
+                    {% for row in SG %}
+                        <a href="#{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','')).lower() }}"
+                           class="cand-link {{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').lower() }}">
+                            <li>{{ row['Candidate Name'] }}</li>
+                        </a>
+                    {% endfor %}
+                {% elif request.path == '/gsa' %}
+                    {% for row in GSA %}
+                        <a href="#{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','')).lower() }}"
+                           id="{{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').lower() }}"
+                           class="cand-link">
+                            <li>{{ row['Candidate Name'] }}</li>
+                        </a>
+                    {% endfor %}
+                {% elif request.path == '/coop' %}
+                    {% for row in Coop %}
+                        <a href="#{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','')).lower() }}"
+                           id="{{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').lower() }}"
+                           class="cand-link">
+                            <li>{{ row['Candidate Name'] }}</li>
+                        </a>
+                    {% endfor %}
+                {% elif request.path == '/union' %}
+                    {% for row in Union %}
+                        <a href="#{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','')).lower() }}"
+                           id="{{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').lower() }}"
+                           class="cand-link">
+                            <li>{{ row['Candidate Name'] }}</li>
+                        </a>
+                    {% endfor %}
+                {% elif request.path == '/tsm' %}
+                    {% for row in TSM %}
+                        <a href="#{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','')).lower() }}"
+                           id="{{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').lower() }}"
+                           class="cand-link">
+                            <li>{{ row['Candidate Name'] }}</li>
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    Oops, we messed up. Please refresh the page and try again.
+                {% endif %}
+                <!-- FIXME ugly way to remove duplicates at least do something to hide the unstyled flash -->
+                <script>
+                    var seen = {};
+                    $('.race-link').each(function () {
+                        var txt = $(this).text();
+                        if (seen[txt])
+                            $(this).remove();
+                        else
+                            seen[txt] = true;
+                    });
+                </script>
+            </ul>
         </div>
     </div>
-    <div class="col-md-4"></div>
-    {% for row in sheetName %}
-        <div class="col-md-4 left">
-            <img src="{{ photo_url }}" alt="{{ candidate_name }}" class="candidate-img">
-            <p class="photo-cred">{{ photo_credit }}</p>
-            <h4 class="link">{{ major }}</h4>
-            <h4 class="link">{{ year }}</h4>
-            <h4 class="link"><a href="{{ website }}">{{ candidate_name }} Campaign Website</a></h4>
-            <h4 class="link"><a href="{{ twitter }}">{{ candidate_name }} Twitter</a></h4>
-        </div>
-        <div class="col-md-8 main">
-            <h3 class="position">{{ position }}</h3>
-            <h4 class="subhead">Statement</h4>
-            <p class="description">{{ statement }}</p>
-            <h4 class="subhead">Platform</h4>
-            <p class="description">{{ platform }}</p>
-            {% if DT_coverage != '' %}
-                <h4 class="subhead">Daily Texan Coverage</h4>
-                <p class="description">Some content</p>
-            {% endif %}
-        </div>
-    {% endfor %}
-    <hr/>
+    <script>
+
+    </script>
+    <div class="info" style="text-align: center;">
+        <hr id="minihr"/>
+        <h3 id="race-contain"></h3>
+        <h4 style="font-style: italic; padding-bottom: .5em;" id="race-descriptor"></h4>
+    </div>
+</div>
+</div>
+<div class="col-md-4"></div>
+{% if request.path == '/sg' %}
+{% for row in SG %}
+<hr class="pad-down" id="{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','')).lower() }}"/>
+<div class="col-md-12 candidate-contain {{ "candidate" + "_" + row['Position'].replace( " ","_").replace('+',"_").replace('-','_').lower() }} ">
+    <div class="col-md-4 left">
+        <img src="/static/{{ row['Photo URL'] }}.jpg" alt="{{ row['Candidate Name'] }}" class="candidate-img">
+        <p class="photo-cred">{% if row['Photo Credit'] != '' %}{{ row['Photo Credit'] }}{% else %}Photo courtesy of the
+            candidate{% endif %}</p>
+        <h4 class="link">{{ row['Major'] }}</h4>
+        <h4 class="link">{{ row['Year'] }}</h4>
+        {% if row['Campaign Website'] != '' %}
+            <h4 class="link"><a href="{{ row['Campaign Website'] }}" target="_blank">{{ row['Candidate Name'] }}
+                Campaign
+                Website</a></h4>
+        {% endif %}
+        {% if row['Twitter Feed URL'] != '' %}
+            <h4 class="link"><a href="http://twitter.com/{{ row['Twitter Feed URL'] }}"
+                                target="_blank">{{ row['Candidate Name'] }} Twitter</a></h4>
+        {% endif %}
+    </div>
+    <div class="col-md-8 main">
+        <h2 class="name">{{ row['Candidate Name'] }}</h2>
+        <h3 class="position">{{ row['Position'] }}</h3>
+        <h4 class="subhead">Statement</h4>
+        <p class="description">{{ row['Statement'] }}</p>
+        <h4 class="subhead">Platform</h4>
+        {% autoescape false %}
+        <p class="description platform">{{ row['Platform'] }}</p>
+        {% endautoescape %}
+        {% if row['DT Coverage URL'] != '' %}
+            <h4 class="subhead">Daily Texan Coverage</h4>
+            <p class="description">Some content</p>
+        {% endif %}
+    </div>
+</div>
+{% endfor %}
+<hr/>
+{% elif request.path == '/gsa' %}
+{% for row in GSA %}
+<hr id="{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','')).lower() }}"/>
+<div class="col-md-4 left">
+    <img src="/static/{{ row['Photo URL'] }}.jpg" alt="{{ row['Candidate Name'] }}" class="candidate-img">
+    <p class="photo-cred">{% if row['Photo Credit'] != '' %}{{ row['Photo Credit'] }}{% else %}Photo courtesy of the
+        candidate{% endif %}</p>
+    <h4 class="link">{{ row['Major'] }}</h4>
+    <h4 class="link">{{ row['Year'] }}</h4>
+    {% if row['Campaign Website'] != '' %}
+        <h4 class="link"><a href="{{ row['Campaign Website'] }}" target="_blank">{{ row['Candidate Name'] }} Campaign
+            Website</a></h4>
+    {% endif %}
+    {% if row['Twitter Feed URL'] != '' %}
+        <h4 class="link"><a href="http://twitter.com/{{ row['Twitter Feed URL'] }}"
+                            target="_blank">{{ row['Candidate Name'] }} Twitter</a></h4>
+    {% endif %}
+</div>
+<div class="col-md-8 main">
+    <h2 class="name">{{ row['Candidate Name'] }}</h2>
+    <h3 class="position">{{ row['Position'] }}</h3>
+    <h4 class="subhead">Statement</h4>
+    <p class="description">{{ row['Statement'] }}</p>
+    <h4 class="subhead">Platform</h4>
+    {% autoescape false %}
+    <p class="description">{{ row['Platform'] }}</p>
+    {% endautoescape %}
+    {% if row['DT Coverage URL'] != '' %}
+        <h4 class="subhead">Daily Texan Coverage</h4>
+        <p class="description">Some content</p>
+    {% endif %}
+</div>
+{% endfor %}
+<hr/>
+{% elif request.path == '/coop' %}
+{% for row in Coop %}
+<hr id="{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','')).lower() }}"/>
+<div class="col-md-4 left">
+    <img src="/static/{{ row['Photo URL'] }}.jpg" alt="{{ row['Candidate Name'] }}" class="candidate-img">
+    <p class="photo-cred">{% if row['Photo Credit'] != '' %}{{ row['Photo Credit'] }}{% else %}Photo courtesy of the
+        candidate{% endif %}</p>
+    <h4 class="link">{{ row['Major'] }}</h4>
+    <h4 class="link">{{ row['Year'] }}</h4>
+    {% if row['Campaign Website'] != '' %}
+        <h4 class="link"><a href="{{ row['Campaign Website'] }}" target="_blank">{{ row['Candidate Name'] }} Campaign
+            Website</a></h4>
+    {% endif %}
+    {% if row['Twitter Feed URL'] != '' %}
+        <h4 class="link"><a href="http://twitter.com/{{ row['Twitter Feed URL'] }}"
+                            target="_blank">{{ row['Candidate Name'] }} Twitter</a></h4>
+    {% endif %}
+</div>
+<div class="col-md-8 main">
+    <h2 class="name">{{ row['Candidate Name'] }}</h2>
+    <h3 class="position">{{ row['Position'] }}</h3>
+    <h4 class="subhead">Statement</h4>
+    <p class="description">{{ row['Statement'] }}</p>
+    <h4 class="subhead">Platform</h4>
+    {% autoescape false %}
+    <p class="description">{{ row['Platform'] }}</p>
+    {% endautoescape %}
+    {% if row['DT Coverage URL'] != '' %}
+        <h4 class="subhead">Daily Texan Coverage</h4>
+        <p class="description">Some content</p>
+    {% endif %}
+</div>
+{% endfor %}
+<hr/>
+{% elif request.path == '/union' %}
+{% for row in Union %}
+<hr id="{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','')).lower() }}"/>
+<div class="col-md-4 left">
+    <img src="/static/{{ row['Photo URL'] }}.jpg" alt="{{ row['Candidate Name'] }}" class="candidate-img">
+    <p class="photo-cred">{% if row['Photo Credit'] != '' %}{{ row['Photo Credit'] }}{% else %}Photo courtesy of the
+        candidate{% endif %}</p>
+    <h4 class="link">{{ row['Major'] }}</h4>
+    <h4 class="link">{{ row['Year'] }}</h4>
+    {% if row['Campaign Website'] != '' %}
+        <h4 class="link"><a href="{{ row['Campaign Website'] }}" target="_blank">{{ row['Candidate Name'] }} Campaign
+            Website</a></h4>
+    {% endif %}
+    {% if row['Twitter Feed URL'] != '' %}
+        <h4 class="link"><a href="http://twitter.com/{{ row['Twitter Feed URL'] }}"
+                            target="_blank">{{ row['Candidate Name'] }} Twitter</a></h4>
+    {% endif %}
+</div>
+<div class="col-md-8 main">
+    <h2 class="name">{{ row['Candidate Name'] }}</h2>
+    <h3 class="position">{{ row['Position'] }}</h3>
+    <h4 class="subhead">Statement</h4>
+    <p class="description">{{ row['Statement'] }}</p>
+    <h4 class="subhead">Platform</h4>
+    {% autoescape false %}
+    <p class="description">{{ row['Platform'] }}</p>
+    {% endautoescape %}
+    {% if row['DT Coverage URL'] != '' %}
+        <h4 class="subhead">Daily Texan Coverage</h4>
+        <p class="description">Some content</p>
+    {% endif %}
+</div>
+{% endfor %}
+<hr/>
+{% elif request.path == '/tsm' %}
+{% for row in TSM %}
+<hr id="{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','')).lower() }}"/>
+<div class="col-md-4 left">
+    <img src="/static/{{ row['Photo URL'] }}.jpg" alt="{{ row['Candidate Name'] }}" class="candidate-img">
+    <p class="photo-cred">{% if row['Photo Credit'] != '' %}{{ row['Photo Credit'] }}{% else %}Photo courtesy of the
+        candidate{% endif %}</p>
+    <h4 class="link">{{ row['Major'] }}</h4>
+    <h4 class="link">{{ row['Year'] }}</h4>
+    {% if row['Campaign Website'] != '' %}
+        <h4 class="link"><a href="{{ row['Campaign Website'] }}" target="_blank">{{ row['Candidate Name'] }} Campaign
+            Website</a></h4>
+    {% endif %}
+    {% if row['Twitter Feed URL'] != '' %}
+        <h4 class="link"><a href="http://twitter.com/{{ row['Twitter Feed URL'] }}"
+                            target="_blank">{{ row['Candidate Name'] }} Twitter</a></h4>
+    {% endif %}
+</div>
+<div class="col-md-8 main">
+    <h2 class="name">{{ row['Candidate Name'] }}</h2>
+    <h3 class="position">{{ row['Position'] }}</h3>
+    <h4 class="subhead">Statement</h4>
+    <p class="description">{{ row['Statement'] }}</p>
+    <h4 class="subhead">Platform</h4>
+    {% autoescape false %}
+    <p class="description">{{ row['Platform'] }}</p>
+    {% endautoescape %}
+    {% if row['DT Coverage URL'] != '' %}
+        <h4 class="subhead">Daily Texan Coverage</h4>
+        <p class="description">Some content</p>
+    {% endif %}
+</div>
+{% endfor %}
+<hr/>
+{% else %}
+404 Error. We lost something. Please refresh the page and try again.
+{% endif %}
 {% endblock %}

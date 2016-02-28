@@ -14,9 +14,12 @@
 		</script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
         <script src="static/js/main.js"></script>
+        <script src="static/js/hashchange.js"></script>
 	</head>
-	<body>
+	<body ng-app="electionApp">
 		<div id="fb-root"></div>
 		<script>(function(d, s, id) {
   			var js, fjs = d.getElementsByTagName(s)[0];
@@ -42,7 +45,7 @@
                 {% endblock %}
 			</div><!-- /.container-fluid -->
 		</nav>
-		<div class="container-fluid main-cont" id="top">
+		<div class="container-fluid main-cont" id="top" ng-controller="selectionController">
 			<div class="row">
 				<div class="col-md-2" aria-label="padding"></div>
   				<div class="col-md-8 intro">

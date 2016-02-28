@@ -1,116 +1,67 @@
-$(document).ready(function(){
-    (function($){
+'use strict';
 
-        $.fn.detachTemp = function() {
-            this.data('dt_placeholder',$('<span style="display: none;" />').insertAfter( this ));
-            return this.detach();
-        }
+var app = angular.module('electionApp',['ngRoute']);
 
-        $.fn.reattach = function() {
-            if(this.data('dt_placeholder')){
-                this.insertBefore( this.data('dt_placeholder') );
-                this.data('dt_placeholder').remove();
-                this.removeData('dt_placeholder');
-            }
-            else if(window.console && console.error)
-                console.error("Unable to append this element "
-                    + "because its placeholder is not available.");
-            return this;
-        }
+app.config(['$interpolateProvider', function($interpolateProvider) {
+    $interpolateProvider.startSymbol('{[');
+    $interpolateProvider.endSymbol(']}');
+}]);
 
-    })(jQuery);
-//FIXME make sure that we can append elements back after we remove them from DOM FIXME
-    //FIXME why does the append calls not get called the first time? make sure that they work on first try without refresh. if person refreshes the screen w already on the page then they should not get kicked to start. localstorage may be good here?
-    //FIXME include google analytics
-    //FIXME make
-    function showCand() {
-        var anchor = document.location.hash;
-        if( anchor === '#exec' ) {
-            $('#race-descriptor').text("There is 1 position available in this race. 4 candidates are running.");
-            $('.executive_alliance:last').nextAll().detach();
-            $('.candidate_executive_alliance').show();
-        }else if ( anchor === '#uwide' ) {
-            $('.university_wide_representative:first').prevAll().detach()
-            $('.university_wide_representative:last').nextAll().detach()
-            $('.candidate-contain:not(".candidate_university_wide_representative")').hide();
-            $('.candidate_university_wide_representative').show();
-            $('#race-descriptor').text("There are 8 positions available in this race. 18 candidates are running.");
-        } else if (anchor === "#arch"){
-            $('.architecture_representative:first').prevAll().detach()
-            $('.architecture_representative:last').nextAll().detach()
-            $('#race-descriptor').text("There is 1 position available in this race. 1 candidate is running.");
-        } else if (anchor === "#mccombs") {
-            $('.mccombs_representative:first').prevAll().detach()
-            $('.mccombs_representative:last').nextAll().detach()
-            $('#race-descriptor').text("There are 3 positions available in this race. 9 candidates are running.");
-        } else if (anchor === "#comm") {
-            $('.communications_representative:first').prevAll().detach()
-            $('.communications_representative:last').nextAll().detach()
-            $('#race-descriptor').text("There are 2 positions available in this race. 3 candidates are running.");
-        } else if (anchor === "#edu") {
-            $('.education_school_representative:first').prevAll().detach()
-            $('.education_school_representative:last').nextAll().detach()
-            $('#race-descriptor').text("There is 1 position available in this race. 2 candidates are running.");
-        } else if (anchor === "#engineering"){
-            $('.engineering_school_representative:first').prevAll().detach()
-            $('.engineering_school_representative:last').nextAll().detach()
-            $('#race-descriptor').text("There is 3 positions available in this race. 4 candidates are running.");
-        } else if (anchor === "#fa"){
-            $('.fine_arts_representative:first').prevAll().detach()
-            $('.fine_arts_representative:last').nextAll().detach()
-            $('#race-descriptor').text("There is 1 position available in this race. 1 candidate is running.");
-        } else if (anchor === "#geo"){
-            $('.geosciences_school_representative:first').prevAll().detach()
-            $('.geosciences_school_representative:last').nextAll().detach()
-            $('#race-descriptor').text("There is 1 position available in this race. 1 candidate is running.");
-        } else if (anchor === "#gradatlarge"){
-            $('.graduate_at_large_representative:first').prevAll().detach()
-            $('.graduate_at_large_representative:last').nextAll().detach()
-            $('#race-descriptor').text("There are 2 positions available in this race. 1 candidate is running.");
-        } else if (anchor === "#law"){
-            $('.law_school_representative:first').prevAll().detach()
-            $('.law_school_representative:last').nextAll().detach()
-            $('#race-descriptor').text("There is 1 position available in this race. 1 candidate is running.");
-        } else if (anchor === "#cola"){
-            $('.liberal_arts_representative:first').prevAll().detach()
-            $('.liberal_arts_representative:last').nextAll().detach()
-            $('#race-descriptor').text("There are 4 positions available in this race. 11 candidates are running.");
-        } else if (anchor === "#cns"){
-            $('.natural_sciences_representative:first').prevAll().detach()
-            $('.natural_sciences_representative:last').nextAll().detach()
-            $('#race-descriptor').text("There are 5 positions available in this race. 6 candidates are running.");
-        } else if (anchor === "#nursing"){
-        $('.nursing_school_representative:first').prevAll().detach()
-        $('.nursingschool_representative:last').nextAll().detach()
-        $('#race-descriptor').text("There is 1 position available in this race. 1 candidate is running.");
-        } else if (anchor === "#sw"){
-            $('.social_work_school_representative:first').prevAll().detach()
-            $('.social_work_school_representative:last').nextAll().detach()
-            $('#race-descriptor').text("There is 1 position available in this race. 1 candidate is running.");
-        } else if (anchor === "#ugs"){
-            $('.school_of_undergraduate_studies_representative:first').prevAll().detach()
-            $('.school_of_undergraduate_studies_representative:last').nextAll().detach()
-            $('#race-descriptor').text("There is 1 position available in this race. 1 candidate is running.");
-        } else {
-            $('.info').hide();
-        }
-    };
-    window.addEventListener("hashchange", showCand, true);
-    var w = window.innerWidth;
-    if (w < 768) {
-        $('nav').removeClass('navbar-fixed-top');
-        $('.main-cont').css('padding-top', '0');
-        $('#minihr').hide();
-        $('#to-top').hide();
+app.controller('selectionController', function($scope){
+    $scope.initialize = function() {
+        //declares
+
+        this.exec = false;
+        this.uwide = false;
+        this.arch = false;
+        this.mccombs = false;
+        this.comm = false;
+        this.edu = false;
+        this.engineering = false;
+        this.fa = false;
+        this.geo = false;
+        this.gradatlarge = false;
+        this.law = false;
+        this.cola = false;
+        this.cns = false;
+        this.nursing = false;
+        this.sw = false;
+        this.ugs = false;
+        this.gsapres = false;
+        this.gsavp = false;
+        this.board = false;
+        this.unionboard = false;
+        this.unionpres = false;
+        this.eic = false;
+        this.tsmboard = false;
+
+        //returns
+
+        return this.exec;
+        return this.uwide;
+        return this.arch;
+        return this.mccombs;
+        return this.comm;
+        return this.edu;
+        return this.engineering;
+        return this.fa;
+        return this.geo;
+        return this.gradatlarge;
+        return this.law;
+        return this.cola;
+        return this.cns;
+        return this.nursing;
+        return this.sw;
+        return this.ugs;
+        return this.gsapres;
+        return this.gsavp;
+        return this.board;
+        return this.unionboard;
+        return this.unionpres;
+        return this.eic;
+        return this.tsmboard;
     }
-    $('#to-top').click(function(){
-        $('html, body').animate({scrollTop:$('#top').position().top}, 'slow');
-    });
-    $('.elections, .races, .candidates, .info, .candidate-contain, hr:not("#not-first")').hide();
-    $('hr:first-of-type').show();
-    $('.cand-btn').addClass('disabled');
-    $('.elections-btn').click(function(){
-
+    $scope.showElection = function($scope){
         if($('.elections').css('display') == 'none' ) {
             $('.elections').slideDown('fast');
             $('#ico0').removeClass('fa-caret-right').addClass('fa-caret-down');
@@ -118,10 +69,8 @@ $(document).ready(function(){
             $('.elections').slideUp('fast');
             $('#ico0').removeClass('fa-caret-down').addClass('fa-caret-right');
         }
-    });
-    $('.race-btn').click(function(){
-        $('.cand-link').append();
-        $('.candidate-contain').append();
+    };
+    $scope.showRace = function($scope){
         $('.cand-btn').removeClass('disabled');
         if($('.races').css('display') == 'none' ) {
             $('.races').slideDown('fast');
@@ -134,36 +83,100 @@ $(document).ready(function(){
             $('.races').slideUp('fast');
             $('#ico1').removeClass('fa-caret-down').addClass('fa-caret-right');
         }
-    });
-    if($('.cand-btn').hasClass('disabled')){
-        //
-    } else {
-        $('.cand-btn').click(function(){
-            if($('.candidates').css('display') == 'none' ) {
-                $('.candidates').slideDown("fast");
-                $('#ico2').removeClass('fa-caret-right').addClass('fa-caret-down');
-            } else {
-                $('.candidates').slideUp("fast");
-                $('#ico2').removeClass('fa-caret-down').addClass('fa-caret-right');
-            }
-        });
-    }
-    $('.race-link').click(function(e){
-        e.preventDefault();
-        var href = $(this).attr('href');
-        $('.races').slideUp('500', function() {
+    };
+    $scope.grabRace = function($scope) {
+        $('.races').slideUp('500', function () {
             $('#ico1').removeClass('fa-caret-down').addClass('fa-caret-right');
             $('.candidates').slideDown('500');
             $('#ico2').removeClass('fa-caret-right').addClass('fa-caret-down');
-            window.location = href;
         });
+    };
+    $scope.showCandidate = function($scope) {
+        if ($('.cand-btn').hasClass('disabled')) {
+            return false;
+        } else {
+            $('.cand-btn').click(function () {
+                if ($('.candidates').css('display') == 'none') {
+                    $('.candidates').slideDown("fast");
+                    $('#ico2').removeClass('fa-caret-right').addClass('fa-caret-down');
+                } else {
+                    $('.candidates').slideUp("fast");
+                    $('#ico2').removeClass('fa-caret-down').addClass('fa-caret-right');
+                }
+            });
+        }
+    };
+    $scope.updateView = function($scope){
+
+    };
+});
+
+$(document).ready(function(){
+    //FIXME make sure that we can append elements back after we remove them from DOM FIXME
+    //FIXME why does the append calls not get called the first time? make sure that they work on first try without refresh. if person refreshes the screen w already on the page then they should not get kicked to start. localstorage may be good here?
+    //FIXME include google analytics
+    //FIXME make
+    var w = window.innerWidth;
+    if (w < 768) {
+        $('nav').removeClass('navbar-fixed-top');
+        $('.main-cont').css('padding-top', '0');
+        $('#minihr').hide();
+        $('#to-top').hide();
+    }
+    $('#to-top').click(function(){
+        $('html, body').animate({scrollTop:$('#top').position().top}, 'slow');
     });
+    $('.elections, .races, .candidates, .info').hide();
     $('.race-link').click(function(){
         var txt = $(this).text();
         $('#race-contain').text(txt);
         $('.info').slideDown("fast");
     });
-    $('.cand-link').click(function(){
-        $('.cand-link').append();
-    })
+    //WORKING IMPLEMENTATION OF HASHCHANGE
+    (function(){
+        $(window).hashchange(function(){
+            if( location.hash === '#exec' ) {
+                $('#race-descriptor').text("There is 1 position available in this race. 4 candidates are running.");
+            }else if ( location.hash === '#uwide' ) {
+                $('#race-descriptor').text("There are 8 positions available in this race. 18 candidates are running.");
+            } else if (location.hash === "#arch"){
+                $('#race-descriptor').text("There is 1 position available in this race. 1 candidate is running.");
+            } else if (location.hash === "#mccombs") {
+                $('#race-descriptor').text("There are 3 positions available in this race. 9 candidates are running.");
+            } else if (location.hash === "#comm") {
+                $('#race-descriptor').text("There are 2 positions available in this race. 3 candidates are running.");
+            } else if (location.hash === "#edu") {
+                $('#race-descriptor').text("There is 1 position available in this race. 2 candidates are running.");
+            } else if (location.hash === "#engineering"){
+                $('#race-descriptor').text("There are 3 positions available in this race. 4 candidates are running.");
+            } else if (location.hash === "#fa"){
+                $('#race-descriptor').text("There is 1 position available in this race. 1 candidate is running.");
+            } else if (location.hash === "#geo"){
+                $('#race-descriptor').text("There is 1 position available in this race. 1 candidate is running.");
+            } else if (location.hash === "#gradatlarge"){
+                $('#race-descriptor').text("There are 2 positions available in this race. 1 candidate is running.");
+            } else if (location.hash === "#law"){
+                $('#race-descriptor').text("There is 1 position available in this race. 1 candidate is running.");
+            } else if (location.hash === "#cola"){
+                $('#race-descriptor').text("There are 4 positions available in this race. 11 candidates are running.");
+            } else if (location.hash === "#cns"){
+                $('#race-descriptor').text("There are 5 positions available in this race. 6 candidates are running.");
+            } else if (location.hash === "#nursing"){
+                $('#race-descriptor').text("There is 1 position available in this race. 1 candidate is running.");
+            } else if (location.hash === "#sw"){
+                $('#race-descriptor').text("There is 1 position available in this race. 1 candidate is running.");
+            } else if (location.hash === "#ugs"){
+                $('#race-descriptor').text("There is 1 position available in this race. 1 candidate is running.");
+            } else if (location.hash === "#gsapres"){
+                $('#race-descriptor').text("There is 1 position available in this race. 3 candidates are running.");
+            } else if (location.hash === "#gsavp"){
+                $('#race-descriptor').text("There is 1 position available in this race. 3 candidates are running.");
+            } else if (location.hash === "#board"){
+                $('#race-descriptor').text("There are 2 positions available in this race. 4 candidates are running.");
+            } else {
+                $('.info').hide();
+            }
+        });
+        $(window).hashchange();
+    }());
 });

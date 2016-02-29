@@ -1,8 +1,16 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
 {% block header %}2016 Student Election Explorer{% endblock %}`
-{% block credits %}<h5>By <a href="https://www.dailytexanonline.com/author/junyuan-tan">Junyuan Tan</a>, <a href="https://www.dailytexanonline.com/author/amy-zhang">Amy Zhang</a>, and <a href="https://www.dailytexanonline.com/author/rachel-zein">Rachel Zein</a></h5>{% endblock %}
+{% block credits %}<h5>By <a href="https://www.dailytexanonline.com/author/junyuan-tan">Junyuan Tan</a>, <a href="https://www.dailytexanonline.com/author/amy-zhang">Amy Zhang</a>, and <a href="https://www.dailytexanonline.com/author/adam-humphrey">Adam Humphrey</a></h5>{% endblock %}
 {% block content %}
+    <div class="row">
+        <div class="col-md-2" aria-label="padding"></div>
+        <div class="col-md-8 intro" style="text-align: center;">
+            <p>It’s that time of year again. Students from around campus are getting ready to decide who will represent them across all areas of student government.</p>
+            <p>Through this explorer, you will be able to see each candidate’s (or alliance’s) information that they provided to us. To start exploring, click the menu below and select a race to see who is running and what they aim to do if elected.</p>
+        </div>
+        <div class="col-md-2" aria-label="padding"></div>
+    </div>
     <div class="sel-category" style="text-align: center;" ng-controller="selectionController">
         <div class="cat">
             Select an  &nbsp;

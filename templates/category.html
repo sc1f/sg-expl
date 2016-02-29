@@ -15,7 +15,7 @@
     {% endif %}
 {% endblock %}
 {% block navigation %}
-    <div class="collapse navbar-collapse">
+    <div class="collapse navbar-collapse" id="collapseMe">
         <ul class="nav navbar-nav navbar-right">
             <li id="homebtn"><a href="/">Home</a></li>
             <li class="dropdown">
@@ -32,9 +32,7 @@
         </ul> <!-- navbar-right -->
     </div>
 {% endblock %}
-{% block credits %}<h5>By <a href="https://www.dailytexanonline.com/author/junyuan-tan">Junyuan Tan</a>, <a
-        href="https://www.dailytexanonline.com/author/amy-zhang">Amy Zhang</a>, and <a
-        href="https://www.dailytexanonline.com/author/rachel-zein">Rachel Zein</a></h5>
+{% block credits %}<h5>By <a href="https://www.dailytexanonline.com/author/junyuan-tan">Junyuan Tan</a> and <a href="https://www.dailytexanonline.com/author/amy-zhang">Amy Zhang</a></h5>
 {% endblock %}
 {% block header %}
     {% if request.path == '/sg' %}
@@ -84,7 +82,7 @@
             <ul>
                 {% if request.path == '/sg' %}
                     {% for row in SG %}
-                        <a ng-href="#{{ row['URL'] }}" class="race-link" id="{{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').lower() }}" ng-click="{{ row['URL'] }} = !{{ row['URL'] }}; grabRace();" >
+                        <a ng-href="#{{ row['URL'] }}" class="race-link" id="{{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').replace(',','').lower() }}" ng-click="{{ row['URL'] }} = !{{ row['URL'] }}; grabRace();" >
                             <li>{{ row['Position'] }}</li>
                         </a>
                     {% endfor %}
@@ -97,25 +95,25 @@
                     <li style="color: grey; font-size:.85em">* There are no candidates in this race.</li>
                 {% elif request.path == '/gsa' %}
                     {% for row in GSA %}
-                        <a ng-href="#{{ row['URL'] }}" class="race-link" ng-click="{{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').lower() }} = true; grabRace();" >
+                        <a ng-href="#{{ row['URL'] }}" class="race-link" id="{{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').replace(',','').lower() }}" ng-click="{{ row['URL'] }} = !{{ row['URL'] }}; grabRace();" >
                             <li>{{ row['Position'] }}</li>
                         </a>
                     {% endfor %}
                 {% elif request.path == '/coop' %}
                     {% for row in Coop %}
-                        <a ng-href="#{{ row['URL'] }}" class="race-link" ng-click="{{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').lower() }} = true; grabRace();" >
+                        <a ng-href="#{{ row['URL'] }}" class="race-link" id="{{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').replace(',','').lower() }}" ng-click="{{ row['URL'] }} = !{{ row['URL'] }}; grabRace();" >
                             <li>{{ row['Position'] }}</li>
                         </a>
                     {% endfor %}
                 {% elif request.path == '/union' %}
                     {% for row in Union %}
-                        <a ng-href="#{{ row['URL'] }}" class="race-link" ng-click="{{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').lower() }} = true; grabRace();" >
+                        <a ng-href="#{{ row['URL'] }}" class="race-link" id="{{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').replace(',','').lower() }}" ng-click="{{ row['URL'] }} = !{{ row['URL'] }}; grabRace();" >
                             <li>{{ row['Position'] }}</li>
                         </a>
                     {% endfor %}
                 {% elif request.path == '/tsm' %}
                     {% for row in TSM %}
-                        <a ng-href="#{{ row['URL'] }}" class="race-link" id="{{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').lower() }}" ng-click="{{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').lower() }} = !{{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').lower() }}; grabRace();" >
+                        <a ng-href="#{{ row['URL'] }}" class="race-link" id="{{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').replace(',','').lower() }}" ng-click="{{ row['URL'] }} = !{{ row['URL'] }}; grabRace();" >
                             <li>{{ row['Position'] }}</li>
                         </a>
                     {% endfor %}
@@ -142,37 +140,37 @@
             <ul id="cand_main">
                 {% if request.path == '/sg' %}
                     {% for row in SG %}
-                        <a ng-href="#{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','')).lower() }}"
-                           class="cand-link {{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').lower() }}">
+                        <a ng-href="#{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','').replace('&quot;','')).lower() }}"
+                           class="cand-link {{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').replace(',','').lower() }}">
                             <li ng-show="{{ row['URL'] }} === true;">{{ row['Candidate Name'] }}</li>
                         </a>
                     {% endfor %}
                 {% elif request.path == '/gsa' %}
                     {% for row in GSA %}
-                        <a ng-href="#{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','')).lower() }}"
-                           class="cand-link {{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').lower() }}" >
-                            <li ng-show="{{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').lower() }} === true;">{{ row['Candidate Name'] }}</li>
+                        <a ng-href="#{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','').replace('&quot;','')).lower() }}"
+                           class="cand-link {{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').replace(',','').lower() }}">
+                            <li ng-show="{{ row['URL'] }} === true;">{{ row['Candidate Name'] }}</li>
                         </a>
                     {% endfor %}
                 {% elif request.path == '/coop' %}
                     {% for row in Coop %}
-                        <a ng-href="#{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','')).lower() }}"
-                           class="cand-link {{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').lower() }}" >
-                            <li ng-show="{{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').lower() }} === true;">{{ row['Candidate Name'] }}</li>
+                        <a ng-href="#{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','').replace('&quot;','')).lower() }}"
+                           class="cand-link {{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').replace(',','').lower() }}">
+                            <li ng-show="{{ row['URL'] }} === true;">{{ row['Candidate Name'] }}</li>
                         </a>
                     {% endfor %}
                 {% elif request.path == '/union' %}
                     {% for row in Union %}
-                        <a ng-href="#{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','')).lower() }}"
-                           class="cand-link {{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').lower() }}" >
-                            <li ng-show="{{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').lower() }} === true;">{{ row['Candidate Name'] }}</li>
+                        <a ng-href="#{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','').replace('&quot;','')).lower() }}"
+                           class="cand-link {{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').replace(',','').lower() }}">
+                            <li ng-show="{{ row['URL'] }} === true;">{{ row['Candidate Name'] }}</li>
                         </a>
                     {% endfor %}
                 {% elif request.path == '/tsm' %}
                     {% for row in TSM %}
-                        <a ng-href="#{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','')).lower() }}"
-                           class="cand-link {{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').lower() }}" >
-                            <li ng-show="{{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').lower() }} === true;">{{ row['Candidate Name'] }}</li>
+                        <a ng-href="#{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','').replace('&quot;','')).lower() }}"
+                           class="cand-link {{ row['Position'].replace( " ","_").replace('+',"_").replace('-','_').replace(',','').lower() }}">
+                            <li ng-show="{{ row['URL'] }} === true;">{{ row['Candidate Name'] }}</li>
                         </a>
                     {% endfor %}
                 {% else %}
@@ -204,11 +202,10 @@
 {% for row in SG %}
 <div class="col-md-12 candidate-contain {{ "candidate" + "_" + row['Position'].replace( " ","_").replace('+',"_").replace('-','_').replace('&','_').lower() }}" ng-show="{{ row['URL'] }} == true">
     <hr class="pad-down"
-        id="{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','')).lower() }}"/>
+        id="{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','').replace('&quot;','')).lower() }}"/>
     <div class="col-md-4 left">
-        <img src="/static/{{ row['Photo URL'] }}.jpg" alt="{{ row['Candidate Name'] }}" class="candidate-img">
-        <p class="photo-cred">{% if row['Photo Credit'] != '' %}{{ row['Photo Credit'] }}{% else %}Photo courtesy of the
-            candidate{% endif %}</p>
+        <img src="/static/images/{{ row['Photo URL'].replace(' ', '_') }}.jpg" alt="{{ row['Candidate Name'] }}" class="candidate-img">
+        <p class="photo-cred">{% if row['Photo Credit'] != '' %}{{ row['Photo Credit'] }}{% else %}Default illustration by Albert Lee{% endif %}</p>
         <h4 class="link">{{ row['Major'] }}</h4>
         <h4 class="link">{{ row['Year'] }}</h4>
         {% if row['Campaign Website'] != '' %}
@@ -217,7 +214,7 @@
                 Website</a></h4>
         {% endif %}
         {% if row['Twitter Feed URL'] != '' %}
-            <h4 class="link"><a href="http://twitter.com/{{ row['Twitter Feed URL'] }}"
+            <h4 class="link"><a href="http://twitter.com/{{ row['Twitter Feed URL'].replace('@','').replace('https://twitter.com/','') }}"
                                 target="_blank">{{ row['Candidate Name'] }} Twitter</a></h4>
         {% endif %}
     </div>
@@ -230,10 +227,6 @@
         {% autoescape false %}
         <p class="description platform">{{ row['Platform'] }}</p>
         {% endautoescape %}
-        {% if row['DT Coverage URL'] != '' %}
-            <h4 class="subhead">Daily Texan Coverage</h4>
-            <p class="description">Some content</p>
-        {% endif %}
     </div>
 </div>
 {% endfor %}
@@ -242,11 +235,10 @@
 {% for row in GSA %}
 <div class="col-md-12 candidate-contain {{ "candidate" + "_" + row['Position'].replace( " ","_").replace('+',"_").replace('-','_').replace('&','_').lower() }}" ng-show="{{ row['URL'] }} == true">
     <hr class="pad-down"
-        id="{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','')).lower() }}"/>
+        id="{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','').replace('&quot;','')).lower() }}"/>
     <div class="col-md-4 left">
-        <img src="/static/{{ row['Photo URL'] }}.jpg" alt="{{ row['Candidate Name'] }}" class="candidate-img">
-        <p class="photo-cred">{% if row['Photo Credit'] != '' %}{{ row['Photo Credit'] }}{% else %}Photo courtesy of the
-            candidate{% endif %}</p>
+        <img src="/static/images/{{ row['Photo URL'].replace(' ', '_') }}.jpg" alt="{{ row['Candidate Name'] }}" class="candidate-img">
+        <p class="photo-cred">{% if row['Photo Credit'] != '' %}{{ row['Photo Credit'] }}{% else %}Default illustration by Albert Lee{% endif %}</p>
         <h4 class="link">{{ row['Major'] }}</h4>
         <h4 class="link">{{ row['Year'] }}</h4>
         {% if row['Campaign Website'] != '' %}
@@ -255,7 +247,7 @@
                 Website</a></h4>
         {% endif %}
         {% if row['Twitter Feed URL'] != '' %}
-            <h4 class="link"><a href="http://twitter.com/{{ row['Twitter Feed URL'] }}"
+            <h4 class="link"><a href="http://twitter.com/{{ row['Twitter Feed URL'].replace('@','').replace('https://twitter.com/','') }}"
                                 target="_blank">{{ row['Candidate Name'] }} Twitter</a></h4>
         {% endif %}
     </div>
@@ -268,99 +260,18 @@
         {% autoescape false %}
         <p class="description platform">{{ row['Platform'] }}</p>
         {% endautoescape %}
-        {% if row['DT Coverage URL'] != '' %}
-            <h4 class="subhead">Daily Texan Coverage</h4>
-            <p class="description">Some content</p>
-        {% endif %}
     </div>
 </div>
 {% endfor %}
 <hr/>
 {% elif request.path == '/coop' %}
 {% for row in Coop %}
-    <div class="col-md-12 candidate-contain {{ "candidate" + "_" + row['Position'].replace( " ","_").replace('+',"_").replace('-','_').replace('&','_').lower() }}" ng-show="{{ row['URL'] }} == true">
-        <hr class="pad-down"
-            id="{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','')).lower() }}"/>
-        <div class="col-md-4 left">
-            <img src="/static/{{ row['Photo URL'] }}.jpg" alt="{{ row['Candidate Name'] }}" class="candidate-img">
-            <p class="photo-cred">{% if row['Photo Credit'] != '' %}{{ row['Photo Credit'] }}{% else %}Photo courtesy of the
-                candidate{% endif %}</p>
-            <h4 class="link">{{ row['Major'] }}</h4>
-            <h4 class="link">{{ row['Year'] }}</h4>
-            {% if row['Campaign Website'] != '' %}
-                <h4 class="link"><a href="{{ row['Campaign Website'] }}" target="_blank">{{ row['Candidate Name'] }}
-                    Campaign
-                    Website</a></h4>
-            {% endif %}
-            {% if row['Twitter Feed URL'] != '' %}
-                <h4 class="link"><a href="http://twitter.com/{{ row['Twitter Feed URL'] }}"
-                                    target="_blank">{{ row['Candidate Name'] }} Twitter</a></h4>
-            {% endif %}
-        </div>
-        <div class="col-md-8 main">
-            <h2 class="name">{{ row['Candidate Name'] }}</h2>
-            <h3 class="position">{{ row['Position'] }}</h3>
-            <h4 class="subhead">Statement</h4>
-            <p class="description">{{ row['Statement'] }}</p>
-            <h4 class="subhead">Platform</h4>
-            {% autoescape false %}
-            <p class="description platform">{{ row['Platform'] }}</p>
-            {% endautoescape %}
-            {% if row['DT Coverage URL'] != '' %}
-                <h4 class="subhead">Daily Texan Coverage</h4>
-                <p class="description">Some content</p>
-            {% endif %}
-        </div>
-    </div>
-{% endfor %}
-<hr/>
-{% elif request.path == '/union' %}
-{% for row in Union %}
-<<div class="col-md-12 candidate-contain {{ "candidate" + "_" + row['Position'].replace( " ","_").replace('+',"_").replace('-','_').replace('&','_').lower() }}" ng-show="{{ row['URL'] }} == true">
-        <hr class="pad-down"
-            id="{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','')).lower() }}"/>
-        <div class="col-md-4 left">
-            <img src="/static/{{ row['Photo URL'] }}.jpg" alt="{{ row['Candidate Name'] }}" class="candidate-img">
-            <p class="photo-cred">{% if row['Photo Credit'] != '' %}{{ row['Photo Credit'] }}{% else %}Photo courtesy of the
-                candidate{% endif %}</p>
-            <h4 class="link">{{ row['Major'] }}</h4>
-            <h4 class="link">{{ row['Year'] }}</h4>
-            {% if row['Campaign Website'] != '' %}
-                <h4 class="link"><a href="{{ row['Campaign Website'] }}" target="_blank">{{ row['Candidate Name'] }}
-                    Campaign
-                    Website</a></h4>
-            {% endif %}
-            {% if row['Twitter Feed URL'] != '' %}
-                <h4 class="link"><a href="http://twitter.com/{{ row['Twitter Feed URL'] }}"
-                                    target="_blank">{{ row['Candidate Name'] }} Twitter</a></h4>
-            {% endif %}
-        </div>
-        <div class="col-md-8 main">
-            <h2 class="name">{{ row['Candidate Name'] }}</h2>
-            <h3 class="position">{{ row['Position'] }}</h3>
-            <h4 class="subhead">Statement</h4>
-            <p class="description">{{ row['Statement'] }}</p>
-            <h4 class="subhead">Platform</h4>
-            {% autoescape false %}
-            <p class="description platform">{{ row['Platform'] }}</p>
-            {% endautoescape %}
-            {% if row['DT Coverage URL'] != '' %}
-                <h4 class="subhead">Daily Texan Coverage</h4>
-                <p class="description">Some content</p>
-            {% endif %}
-        </div>
-    </div>
-{% endfor %}
-<hr/>
-{% elif request.path == '/tsm' %}
-{% for row in TSM %}
 <div class="col-md-12 candidate-contain {{ "candidate" + "_" + row['Position'].replace( " ","_").replace('+',"_").replace('-','_').replace('&','_').lower() }}" ng-show="{{ row['URL'] }} == true">
     <hr class="pad-down"
-        id="{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','')).lower() }}"/>
+        id="{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','').replace('&quot;','')).lower() }}"/>
     <div class="col-md-4 left">
-        <img src="/static/{{ row['Photo URL'] }}.jpg" alt="{{ row['Candidate Name'] }}" class="candidate-img">
-        <p class="photo-cred">{% if row['Photo Credit'] != '' %}{{ row['Photo Credit'] }}{% else %}Photo courtesy of the
-            candidate{% endif %}</p>
+        <img src="/static/images/{{ row['Photo URL'].replace(' ', '_') }}.jpg" alt="{{ row['Candidate Name'] }}" class="candidate-img">
+        <p class="photo-cred">{% if row['Photo Credit'] != '' %}{{ row['Photo Credit'] }}{% else %}Default illustration by Albert Lee{% endif %}</p>
         <h4 class="link">{{ row['Major'] }}</h4>
         <h4 class="link">{{ row['Year'] }}</h4>
         {% if row['Campaign Website'] != '' %}
@@ -369,7 +280,7 @@
                 Website</a></h4>
         {% endif %}
         {% if row['Twitter Feed URL'] != '' %}
-            <h4 class="link"><a href="http://twitter.com/{{ row['Twitter Feed URL'] }}"
+            <h4 class="link"><a href="http://twitter.com/{{ row['Twitter Feed URL'].replace('@','').replace('https://twitter.com/','') }}"
                                 target="_blank">{{ row['Candidate Name'] }} Twitter</a></h4>
         {% endif %}
     </div>
@@ -382,10 +293,72 @@
         {% autoescape false %}
         <p class="description platform">{{ row['Platform'] }}</p>
         {% endautoescape %}
-        {% if row['DT Coverage URL'] != '' %}
-            <h4 class="subhead">Daily Texan Coverage</h4>
-            <p class="description">Some content</p>
+    </div>
+</div>
+{% endfor %}
+<hr/>
+{% elif request.path == '/union' %}
+{% for row in Union %}
+<div class="col-md-12 candidate-contain {{ "candidate" + "_" + row['Position'].replace( " ","_").replace('+',"_").replace('-','_').replace('&','_').lower() }}" ng-show="{{ row['URL'] }} == true">
+    <hr class="pad-down"
+        id="{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','').replace('&quot;','')).lower() }}"/>
+    <div class="col-md-4 left">
+        <img src="/static/images/{{ row['Photo URL'].replace(' ', '_') }}.jpg" alt="{{ row['Candidate Name'] }}" class="candidate-img">
+        <p class="photo-cred">{% if row['Photo Credit'] != '' %}{{ row['Photo Credit'] }}{% else %}Default illustration by Albert Lee{% endif %}</p>
+        <h4 class="link">{{ row['Major'] }}</h4>
+        <h4 class="link">{{ row['Year'] }}</h4>
+        {% if row['Campaign Website'] != '' %}
+            <h4 class="link"><a href="{{ row['Campaign Website'] }}" target="_blank">{{ row['Candidate Name'] }}
+                Campaign
+                Website</a></h4>
         {% endif %}
+        {% if row['Twitter Feed URL'] != '' %}
+            <h4 class="link"><a href="http://twitter.com/{{ row['Twitter Feed URL'].replace('@','').replace('https://twitter.com/','') }}"
+                                target="_blank">{{ row['Candidate Name'] }} Twitter</a></h4>
+        {% endif %}
+    </div>
+    <div class="col-md-8 main">
+        <h2 class="name">{{ row['Candidate Name'] }}</h2>
+        <h3 class="position">{{ row['Position'] }}</h3>
+        <h4 class="subhead">Statement</h4>
+        <p class="description">{{ row['Statement'] }}</p>
+        <h4 class="subhead">Platform</h4>
+        {% autoescape false %}
+        <p class="description platform">{{ row['Platform'] }}</p>
+        {% endautoescape %}
+    </div>
+</div>
+{% endfor %}
+<hr/>
+{% elif request.path == '/tsm' %}
+{% for row in TSM %}
+<div class="col-md-12 candidate-contain {{ "candidate" + "_" + row['Position'].replace( " ","_").replace('+',"_").replace('-','_').replace('&','_').lower() }}" ng-show="{{ row['URL'] }} == true">
+    <hr class="pad-down"
+        id="{{ (row['Candidate Name'].replace(" ","_").replace("/", "_").replace('&','').replace('|||','_').replace('.','').replace(',','').replace('&quot;','')).lower() }}"/>
+    <div class="col-md-4 left">
+        <img src="/static/images/{{ row['Photo URL'].replace(' ', '_') }}.jpg" alt="{{ row['Candidate Name'] }}" class="candidate-img">
+        <p class="photo-cred">{% if row['Photo Credit'] != '' %}{{ row['Photo Credit'] }}{% else %}Default illustration by Albert Lee{% endif %}</p>
+        <h4 class="link">{{ row['Major'] }}</h4>
+        <h4 class="link">{{ row['Year'] }}</h4>
+        {% if row['Campaign Website'] != '' %}
+            <h4 class="link"><a href="{{ row['Campaign Website'] }}" target="_blank">{{ row['Candidate Name'] }}
+                Campaign
+                Website</a></h4>
+        {% endif %}
+        {% if row['Twitter Feed URL'] != '' %}
+            <h4 class="link"><a href="http://twitter.com/{{ row['Twitter Feed URL'].replace('@','').replace('https://twitter.com/','') }}"
+                                target="_blank">{{ row['Candidate Name'] }} Twitter</a></h4>
+        {% endif %}
+    </div>
+    <div class="col-md-8 main">
+        <h2 class="name">{{ row['Candidate Name'] }}</h2>
+        <h3 class="position">{{ row['Position'] }}</h3>
+        <h4 class="subhead">Statement</h4>
+        <p class="description">{{ row['Statement'] }}</p>
+        <h4 class="subhead">Platform</h4>
+        {% autoescape false %}
+        <p class="description platform">{{ row['Platform'] }}</p>
+        {% endautoescape %}
     </div>
 </div>
 {% endfor %}

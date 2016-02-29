@@ -98,6 +98,9 @@ i.fa {
 p, li, .sel-category {
     font-family: Roboto, Helvetica, Arial, sans-serif;
 }
+div.sel-category {
+    padding-bottom:1em !important;
+}
 div.fb-contain {
     margin-bottom: .75em;
 }
@@ -150,7 +153,7 @@ div.main-cont {
     text-decoration: underline;
 }
 .main {
-    padding-right: 5em !important;
+    padding-right: 5em;
 }
 h3.contrib, p.contrib-txt, p.photo-cred {
     text-align: center;
@@ -284,7 +287,7 @@ div.timeline {
     }
     div.main {
         padding-left: 5em;
-        padding-right: 5em !important;
+        padding-right: 5em;
     }
     .subhead.pri {
         margin-bottom: 1em;
@@ -297,6 +300,9 @@ div.timeline {
     }
     p.footer-txt {
         font-size: 1em;
+    }
+    .intro > h5 {
+        line-height: 20px;
     }
 
 }
@@ -319,8 +325,8 @@ div.timeline {
     }
 
     div.main {
-        padding-left: 2em;
-        padding-right: 2em !important;
+        padding-left: 1em;
+        padding-right: 1em;
     }
 
     div.main > p.description {

@@ -62,6 +62,7 @@ app.controller('selectionController', function($scope){
         return this.tsmboard;
     }
     $scope.showElection = function($scope){
+        //$('html,body').animate({scrollTop: $('.elections-btn').offset().top});
         if($('.elections').css('display') == 'none' ) {
             $('.elections').slideDown('fast');
             $('#ico0').removeClass('fa-caret-right').addClass('fa-caret-down');
@@ -71,6 +72,7 @@ app.controller('selectionController', function($scope){
         }
     };
     $scope.showRace = function($scope){
+        //$('html,body').animate({scrollTop: $('.race-btn').offset().top});
         $('.cand-btn').removeClass('disabled');
         if($('.races').css('display') == 'none' ) {
             $('.races').slideDown('fast');
@@ -90,6 +92,7 @@ app.controller('selectionController', function($scope){
             $('.candidates').slideDown('500');
             $('#ico2').removeClass('fa-caret-right').addClass('fa-caret-down');
         });
+        //$('html,body').animate({scrollTop: $('.cand-btn').offset().top});
     };
     $scope.showCandidate = function($scope) {
         if ($('.cand-btn').hasClass('disabled')) {
@@ -112,10 +115,6 @@ app.controller('selectionController', function($scope){
 });
 
 $(document).ready(function(){
-    //FIXME make sure that we can append elements back after we remove them from DOM FIXME
-    //FIXME why does the append calls not get called the first time? make sure that they work on first try without refresh. if person refreshes the screen w already on the page then they should not get kicked to start. localstorage may be good here?
-    //FIXME include google analytics
-    //FIXME make
     var w = window.innerWidth;
     if (w < 768) {
         $('nav').removeClass('navbar-fixed-top');
@@ -173,6 +172,16 @@ $(document).ready(function(){
                 $('#race-descriptor').text("There is 1 position available in this race. 3 candidates are running.");
             } else if (location.hash === "#board"){
                 $('#race-descriptor').text("There are 2 positions available in this race. 4 candidates are running.");
+            } else if (location.hash === "#unionboard"){
+                $('#race-descriptor').text("There are 2 positions available in this race. 7 candidates are running.");
+            } else if (location.hash === "#unionpres"){
+                $('#race-descriptor').text("There is 1 position available in this race. 2 candidates are running.");
+            } else if (location.hash === "#unionpres"){
+                $('#race-descriptor').text("There is 1 position available in this race. 2 candidates are running.");
+            } else if (location.hash === "#eic"){
+                $('#race-descriptor').text("There is 1 position available in this race. 1 candidate is running.");
+            } else if (location.hash === "#tsmboard"){
+                $('#race-descriptor').text("There is 1 position available in this race. 1 candidate is running.");
             } else {
                 $('.info').hide();
             }
